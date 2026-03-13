@@ -5,3 +5,8 @@ function getComputerChoice() {
     return optionsArr[indexOptions];
 }
 
+function getHumanChoice() {
+    let choice = prompt('enter your choice: ', 'rock');
+
+    return choice;
+}
