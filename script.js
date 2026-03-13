@@ -49,12 +49,45 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    let count = +prompt('Enter number of rounds: ', 5);
 
-console.log(`human selection = ${humanSelection}
+    for (let i = 1; i <= count; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        console.log(`Round ${i}
+human selection = ${humanSelection}
 computer selection = ${computerSelection}
 ${playRound(humanSelection, computerSelection)}
 ------ Score -------
 You - ${humanScore}
 Computer - ${computerScore}`);
+    }
+
+    if (humanScore === computerScore) {
+        console.log(`The score is equal!
+Extra Round time!`);
+
+        while (humanScore === computerScore) {
+            const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        console.log(`!Extra Round!
+human selection = ${humanSelection}
+computer selection = ${computerSelection}
+${playRound(humanSelection, computerSelection)}
+------ Score -------
+You - ${humanScore}
+Computer - ${computerScore}`)
+        }
+    }
+    
+    if (humanScore > computerScore) {
+        console.log(`You won! Congratulations!`);
+    } else {
+        console.log(`Oh, maybe you'll be lucky next time :)`);
+    }
+}
+
+playGame();
