@@ -83,13 +83,9 @@ choiceArr.addEventListener('click', function playGame(event) {
 
     if (humanScore >= 5) {
         choiceArr.removeEventListener('click', playGame);
-        resultChoice.remove();
-        resultRound.remove();
         resultMessage.appendChild(wonMessage);
     } else if (computerScore >= 5) {
         choiceArr.removeEventListener('click', playGame);
-        resultChoice.remove();
-        resultRound.remove();
         resultMessage.appendChild(loseMessage);
     }
 })
