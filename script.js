@@ -1,17 +1,24 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let choiceArr = document.querySelector('.choice');
+let resultMessage = document.querySelector('.result');
+
+const resultChoice = document.createElement('p');
+const resultRound = document.createElement('p');
+const resultScore = document.createElement('p');
+
+const wonMessage = document.createElement('p');
+const loseMessage = document.createElement('p');
+
+wonMessage.textContent = 'You won! Congratulations!';
+loseMessage.textContent = 'Oh, maybe you`ll be lucky next time :)';
+
 function getComputerChoice() {
     let optionsArr = ['Rock', 'Paper', 'Scissors'];
     let indexOptions = Math.floor(Math.random() * 3);
 
     return optionsArr[indexOptions];
-}
-
-function getHumanChoice() {
-    let choice = prompt('enter your choice: ', 'Rock');
-
-    return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -26,68 +33,63 @@ function playRound(humanChoice, computerChoice) {
     const computerPaper = computerChoice === optionsArr[1];
     const computerScissors = computerChoice === optionsArr[2];
 
-    if (humanChoice === computerChoice) return resultArr[0];
-
-    if (humanRock && computerPaper) {
+    if (humanChoice === computerChoice) {
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[0]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
+    } else if (humanRock && computerPaper) {
         computerScore++;
-        return `${resultArr[1]} ${optionsArr[1]} beats ${optionsArr[0]}`;
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[1]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     } else if (humanRock && computerScissors) {
         humanScore++;
-        return `${resultArr[2]} ${optionsArr[0]} beats ${optionsArr[2]}`;
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[2]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     } else if (humanPaper && computerRock) {
         humanScore++;
-        return `${resultArr[2]} ${optionsArr[1]} beats ${optionsArr[0]}`;
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[2]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     } else if (humanPaper && computerScissors) {
         computerScore++;
-        return `${resultArr[1]} ${optionsArr[2]} beats ${optionsArr[1]}`;
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[1]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     } else if (humanScissors && computerRock) {
         computerScore++;
-        return `${resultArr[1]} ${optionsArr[0]} beats ${optionsArr[2]}`
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[1]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     } else if (humanScissors && computerPaper) {
         humanScore++;
-        return `${resultArr[2]} ${optionsArr[2]} beats ${optionsArr[1]}`;
+        resultChoice.textContent = `You : ${humanChoice} | ${computerChoice} : Computer`;
+        resultRound.textContent = `${resultArr[2]}`;
+        resultScore.textContent = `Player : ${humanScore} | ${computerScore} : Computer`;
     }
 }
 
-function playGame() {
-    let count = +prompt('Enter number of rounds: ', 5);
-
-    for (let i = 1; i <= count; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-
-        console.log(`Round ${i}
-human selection = ${humanSelection}
-computer selection = ${computerSelection}
-${playRound(humanSelection, computerSelection)}
------- Score -------
-You - ${humanScore}
-Computer - ${computerScore}`);
-    }
-
-    if (humanScore === computerScore) {
-        console.log(`The score is equal!
-Extra Round time!`);
-
-        while (humanScore === computerScore) {
-            const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-
-        console.log(`!Extra Round!
-human selection = ${humanSelection}
-computer selection = ${computerSelection}
-${playRound(humanSelection, computerSelection)}
------- Score -------
-You - ${humanScore}
-Computer - ${computerScore}`)
-        }
-    }
+choiceArr.addEventListener('click', function playGame(event) {
+    let target = event.target;
     
-    if (humanScore > computerScore) {
-        console.log(`You won! Congratulations!`);
-    } else {
-        console.log(`Oh, maybe you'll be lucky next time :)`);
-    }
-}
+    let playerChoice = target.textContent;
 
-playGame();
+    playRound(playerChoice, getComputerChoice());
+
+    resultMessage.appendChild(resultChoice);
+    resultMessage.appendChild(resultRound);
+    resultMessage.appendChild(resultScore);
+
+    if (humanScore >= 5) {
+        choiceArr.removeEventListener('click', playGame);
+        resultChoice.remove();
+        resultRound.remove();
+        resultMessage.appendChild(wonMessage);
+    } else if (computerScore >= 5) {
+        choiceArr.removeEventListener('click', playGame);
+        resultChoice.remove();
+        resultRound.remove();
+        resultMessage.appendChild(loseMessage);
+    }
+})
