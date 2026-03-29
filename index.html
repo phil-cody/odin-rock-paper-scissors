@@ -1,30 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./image/favicon.png" />
     <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <title>Rock | Paper | Scissors</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="hero">
-            <h1 class="title">Rock | Paper | Scissors</h1>
-        </div>
+      <section class="hero">
+        <h1 class="title">Rock | Paper | Scissors</h1>
+      </section>
+      <section class="game">
         <div class="choice">
-            <h2 class="subtitle">Choose your fighter</h2>
-            <button id="rock">🪨</button>
-            <button id="paper">🧻</button>
-            <button id="scissors">✂️</button>
+          <h2 class="subtitle">Choose your fighter</h2>
+          <button id="rock" class="btn">🪨</button>
+          <button id="paper" class="btn">🧻</button>
+          <button id="scissors" class="btn">✂️</button>
         </div>
         <div class="result">
-            <p class="result__round-number">Ready to start?</p>
-            <p class="result__score">Player : 0 | 0 : Computer</p>
+          <p class="result__round-number">Ready to start?</p>
         </div>
         <div class="restart">
-            <button id="restart__button">Start over</button>
+          <button id="restart__button" class="btn">Start over</button>
         </div>
+      </section>
     </div>
-</body>
+  </body>
 </html>
